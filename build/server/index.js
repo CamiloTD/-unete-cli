@@ -49,12 +49,7 @@ function serve(cmd, configFile) {
         var module;
         termx_1.log("Initializing server...");
         //? Import module
-        if (config.ts) {
-            module = yield Promise.resolve().then(() => __importStar(require(config.main)));
-        }
-        else {
-            module = require(config.main);
-        }
+        module = require(config.main);
         if (module.default && Object.keys(module).length > 1)
             delete module.default;
         //? Config Https Server
@@ -141,10 +136,9 @@ function getConfig(configFile = path_1.resolve(process.cwd(), "./unete.yml")) {
         config = yamljs_1.load(configFile);
     }
     catch (exc) { }
-    const entryPoint = config.main || "index.ts";
+    const entryPoint = config.main || "index.js";
     return {
         main: path_1.join(process.cwd(), entryPoint),
-        ts: entryPoint.toLowerCase().endsWith(".ts"),
         name: config.name || "Unete-IO",
         host: (_a = config.host) !== null && _a !== void 0 ? _a : "127.0.0.1",
         port: (_b = config.port) !== null && _b !== void 0 ? _b : 8080,

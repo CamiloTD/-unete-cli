@@ -34,7 +34,6 @@ export var ServerState: {
 
     export interface ServeConfig {
         main: string;
-        ts: boolean;
 
         name: string;
         host: string;
@@ -97,11 +96,7 @@ export async function serve (cmd: any, configFile: string) {
         log("Initializing server...");
 
     //? Import module
-        if(config.ts) {
-            module = await import(config.main);
-        } else {
-            module = require(config.main);
-        }
+        module = require(config.main);
 
         if(module.default && Object.keys(module).length > 1) delete module.default;
     
@@ -212,11 +207,10 @@ function getConfig(configFile: string = resolve(process.cwd(), "./unete.yml")): 
     
     try { config = load(configFile); } catch (exc) {}
     
-    const entryPoint: string = config.main || "index.ts";
+    const entryPoint: string = config.main || "index.js";
 
     return {
         main: join(process.cwd(), entryPoint),
-        ts: entryPoint.toLowerCase().endsWith(".ts"),
 
         name: config.name || "Unete-IO",
         host: config.host ?? "127.0.0.1",

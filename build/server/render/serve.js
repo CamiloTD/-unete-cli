@@ -29,7 +29,6 @@ const nthline = require('nthline');
 exports.serverOptions = null;
 exports.selectedMethod = 0;
 exports.currentSearch = "";
-configTerminal();
 var renderComponents = {
     addrinfo: "",
     methods: "",
@@ -51,6 +50,7 @@ var renderComponents = {
 */
 function initRender(options) {
     return __awaiter(this, void 0, void 0, function* () {
+        configTerminal();
         exports.serverOptions = options;
         exports.serverMethods = utils_1.getMethods(exports.serverOptions.module);
         yield Logs.Init();

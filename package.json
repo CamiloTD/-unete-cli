@@ -1,6 +1,6 @@
 {
   "name": "@unete/cli",
-  "version": "1.0.0-1",
+  "version": "1.0.0-10",
   "main": "index.js",
   "author": "CamiloTD <camilotd1999@gmail.com>",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "yamljs": "^0.3.0"
   },
   "bin": {
-    "unete": "build/index.js"
+    "unete": "./build/index.js"
   },
   "devDependencies": {
     "tsc": "^1.20150623.0",

@@ -30,8 +30,6 @@ const nthline = require('nthline');
 
     export var currentSearch = "";
 
-    configTerminal();
-
     var renderComponents = {
         addrinfo: "",
         methods: "",
@@ -52,6 +50,8 @@ const nthline = require('nthline');
  
 */
 export async function initRender (options: typeof serverOptions) {
+    configTerminal();
+
     serverOptions = options;
     serverMethods = getMethods(serverOptions.module);
 
