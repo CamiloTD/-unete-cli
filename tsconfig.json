@@ -10,5 +10,7 @@
         "module": "commonjs",
         "esModuleInterop": true,
         "noImplicitUseStrict": true
-    }
+    },
+
+    "files": ["index.ts"]
 }

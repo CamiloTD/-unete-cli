@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import cli from "commander";
 import * as Commands from './commands';
+
+const cli = require("commander");
 
 {//? @note (Index) Configure CLI
     cli.version('1.0.0')
@@ -10,7 +11,7 @@ import * as Commands from './commands';
        .option('-l, --log <port>', 'Opens a tcp log server.')
        .option('-c, --config <file>', 'Uses a configuration file.')
        .option('-n, --node', 'Sets up the connecting node')
-       .action((cmd, ...args) => (Commands as any)[cmd] && (Commands as any)[cmd](...args));
+       .action((cmd: any, ...args: any) => (Commands as any)[cmd] && (Commands as any)[cmd](...args));
 
        cli.parse(process.argv)
 }
