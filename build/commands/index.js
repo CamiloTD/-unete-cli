@@ -16,6 +16,7 @@ const storage_1 = __importDefault(require("../storage"));
 const termx_1 = require("termx");
 const io_1 = require("@unete/io");
 const chalk_1 = __importDefault(require("chalk"));
+const server_1 = require("../server");
 const { toArray } = require('rxjs/operators');
 { //? @note REGEX
     var REGEX_ASSIGNMENT = /^\$\.([^(]+)=(.+)$/;
@@ -116,6 +117,7 @@ function connect(url, program) {
     });
 }
 exports.connect = connect;
+exports.serve = server_1.serve;
 { //? @note Utility Functions
     var helpify = function (obj, help, header = "", pre = "", tabs = "") {
         let str = termx_1.cold(header && `+ ${pre + "*"}:`) || "";

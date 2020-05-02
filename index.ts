@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import * as Commands from './commands';
 
 const cli = require("commander");

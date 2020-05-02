@@ -8,6 +8,7 @@ import { log, danger, cold, highlight, warning } from "termx";
 import readline from "readline-sync";
 import { Socket as Sock, Server } from "@unete/io";
 import Chalk from "chalk";
+import { serve as $serve } from '../server';
 
 const { toArray } = require('rxjs/operators');
 
@@ -132,6 +133,8 @@ export async function connect (url: string, program: any) {
     for(let i in store.data)
         r.context[i] = store.data[i];
 }
+
+export const serve = $serve;
 
 {//? @note Utility Functions
     var helpify = function (obj: any, help: any, header = "", pre = "", tabs="") {
