@@ -1,6 +1,6 @@
 {
   "name": "@unete/cli",
-  "version": "1.0.0-16",
+  "version": "1.0.0-17",
   "main": "index.js",
   "author": "CamiloTD <camilotd1999@gmail.com>",
   "license": "MIT",

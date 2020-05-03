@@ -48,6 +48,8 @@ export var ServerState: {
             cert: string;
             ca: string;
         }
+
+        env?: { [key: string]: any }
     }
 
     export interface ServerStats {
@@ -82,25 +84,34 @@ export var ServerState: {
 */
 
 export async function serve (cmd: any, configFile: string) {
-    //? Init
-        var config: ServeConfig = getConfig(configFile);
-        var stats: ServerStats = {
-            methodStats: {},
-            connected: {},
-            connectedSockets: new Map()
-        };
-        var methodTiming: { [iid: string]: number } = {};
+    {//? @note (Serve) Init
+        {//? @note (Serve.Init) Define Variables
+            var config: ServeConfig = getConfig(configFile);
+            var stats: ServerStats = {
+                methodStats: {},
+                connected: {},
+                connectedSockets: new Map()
+            };
+            var methodTiming: { [iid: string]: number } = {};
 
-        var module: any;
+            var module: any;
 
-        log("Initializing server...");
+            log("Initializing server...");
+        }
 
-    //? Import module
+        {//? @note (Serve.Init) Setup env
+            for (let i in config.env)
+                process.env[i] = config.env[i];
+        }
+    }
+
+    {//? @note (Serve) Import module
         module = require(config.main);
 
         if(module.default && Object.keys(module).length > 1) delete module.default;
+    }
     
-    //? Config Https Server
+    {//? @note (Serve) Config Https Server
         var https_server;
         
         if(config.https) {
@@ -110,9 +121,10 @@ export async function serve (cmd: any, configFile: string) {
                 ca  : fs.readFileSync(path.resolve(process.cwd(), config.https.ca))
             });
         }
+    }
 
-    //? Listen
-        const getMethodStat = (method: string) => 
+    {//? Listen
+        var getMethodStat = (method: string) => 
             stats.methodStats[method] ?? (
             stats.methodStats[method] = ({ 
                 errors: 0,
@@ -124,7 +136,7 @@ export async function serve (cmd: any, configFile: string) {
                 lastErrorStack: ""
             }))
 
-        const server = ServerState.server = new Server({
+        var server = ServerState.server = new Server({
             ...module,
 
             $before_call ({ path, iid }: any) {
@@ -182,13 +194,17 @@ export async function serve (cmd: any, configFile: string) {
         } else {
             await server.listen(config.port)
         }
+    }
         
-    //? On Server Connection
+    {//? @note (Serve) On Server Connection
         server.on('connection', (sock: any) => {
             ServerRender.logConnection(sock);
         });
-    //? Render
+    }
+
+    {//? @note (Serve) Render
         ServerRender.initRender({ config, server, module, stats });
+    }
 }
 
 /*
@@ -209,6 +225,15 @@ export function getConfig(configFile: string = resolve(process.cwd(), "./unete.y
     
     const entryPoint: string = config.main || "index.js";
 
+    {//? @note (GetConfig) Configure env
+        var env = config.env || {};
+        var currentEnv = process.env.ENV.toLowerCase() || "default";
+
+        if(!env.default) env.default = {};
+
+        env = { ...env.default, ...(env[currentEnv] || {}) }
+    }
+
     return {
         main: join(process.cwd(), entryPoint),
 
@@ -220,6 +245,8 @@ export function getConfig(configFile: string = resolve(process.cwd(), "./unete.y
         https: config.https,
 
         log: resolve(process.cwd(), config.log ?? "./unete.log"),
-        log_persist: !!config.log_persist
+        log_persist: !!config.log_persist,
+
+        env
     }
 }

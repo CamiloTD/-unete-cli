@@ -1,4 +1,5 @@
 import { log } from "termx";
+import { unlinkSync } from "fs";
 
 const clone = require('git-shallow-clone')
 
