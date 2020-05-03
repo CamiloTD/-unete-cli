@@ -1,6 +1,6 @@
 {
   "name": "@unete/cli",
-  "version": "1.0.0-11",
+  "version": "1.0.0-13",
   "main": "index.js",
   "author": "CamiloTD <camilotd1999@gmail.com>",
   "license": "MIT",
@@ -19,6 +19,7 @@
     "colors": "^1.3.3",
     "commander": "^2.20.0",
     "git-clone": "^0.1.0",
+    "git-shallow-clone": "^0.0.2",
     "moment": "^2.24.0",
     "nthline": "^1.0.2",
     "rxjs": "^6.5.3",

@@ -146,8 +146,6 @@ export async function init () {
             case "Typescript": await Templates.Typescript(); break;
             case "Javascript": await Templates.Javascript(); break;
         }
-
-        process.exit(0);
     })
 }
 

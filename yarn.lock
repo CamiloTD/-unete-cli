@@ -459,6 +459,11 @@ git-clone@^0.1.0:
   resolved "https://registry.yarnpkg.com/git-clone/-/git-clone-0.1.0.tgz#0d76163778093aef7f1c30238f2a9ef3f07a2eb9"
   integrity sha1-DXYWN3gJOu9/HDAjjyqe8/B6Lrk=
 
+git-shallow-clone@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/git-shallow-clone/-/git-shallow-clone-0.0.2.tgz#579c4b2e8b1c4999654e2cc18f44f9f0952871f4"
+  integrity sha1-V5xLLoscSZllTizBj0T58JUocfQ=
+
 glob-parent@~5.1.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.1.tgz#b6c1ef417c4e5663ea498f1c45afac6916bbc229"
