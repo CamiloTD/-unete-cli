@@ -227,7 +227,7 @@ export function getConfig(configFile: string = resolve(process.cwd(), "./unete.y
 
     {//? @note (GetConfig) Configure env
         var env = config.env || {};
-        var currentEnv = process.env.ENV.toLowerCase() || "default";
+        var currentEnv = process.env.ENV?.toLowerCase() || "default";
 
         if(!env.default) env.default = {};
 

@@ -142,7 +142,7 @@ exports.serve = serve;
  
 */
 function getConfig(configFile = path_1.resolve(process.cwd(), "./unete.yml")) {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     var config = {};
     try {
         config = yamljs_1.load(configFile);
@@ -151,7 +151,7 @@ function getConfig(configFile = path_1.resolve(process.cwd(), "./unete.yml")) {
     const entryPoint = config.main || "index.js";
     { //? @note (GetConfig) Configure env
         var env = config.env || {};
-        var currentEnv = process.env.ENV.toLowerCase() || "default";
+        var currentEnv = ((_a = process.env.ENV) === null || _a === void 0 ? void 0 : _a.toLowerCase()) || "default";
         if (!env.default)
             env.default = {};
         env = Object.assign(Object.assign({}, env.default), (env[currentEnv] || {}));
@@ -159,11 +159,11 @@ function getConfig(configFile = path_1.resolve(process.cwd(), "./unete.yml")) {
     return {
         main: path_1.join(process.cwd(), entryPoint),
         name: config.name || "Unete-IO",
-        host: (_a = config.host) !== null && _a !== void 0 ? _a : "127.0.0.1",
-        port: (_b = config.port) !== null && _b !== void 0 ? _b : 8080,
+        host: (_b = config.host) !== null && _b !== void 0 ? _b : "127.0.0.1",
+        port: (_c = config.port) !== null && _c !== void 0 ? _c : 8080,
         logo: config.logo && path_1.resolve(process.cwd(), config.logo),
         https: config.https,
-        log: path_1.resolve(process.cwd(), (_c = config.log) !== null && _c !== void 0 ? _c : "./unete.log"),
+        log: path_1.resolve(process.cwd(), (_d = config.log) !== null && _d !== void 0 ? _d : "./unete.log"),
         log_persist: !!config.log_persist,
         env
     };
