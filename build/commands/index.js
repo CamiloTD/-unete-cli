@@ -139,7 +139,6 @@ function init() {
                     yield Templates.Javascript();
                     break;
             }
-            process.exit(0);
         }));
     });
 }
