@@ -134,7 +134,13 @@ export async function connect (url: string, program: any) {
         r.context[i] = store.data[i];
 }
 
+export async function init () {
+    
+}
+
 export const serve = $serve;
+export const s = $serve;
+export const c = connect;
 
 {//? @note Utility Functions
     var helpify = function (obj: any, help: any, header = "", pre = "", tabs="") {
