@@ -148,3 +148,4 @@ function getConfig(configFile = path_1.resolve(process.cwd(), "./unete.yml")) {
         log_persist: !!config.log_persist
     };
 }
+exports.getConfig = getConfig;

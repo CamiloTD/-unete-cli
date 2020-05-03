@@ -12,11 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const repl_1 = __importDefault(require("repl"));
+const path_1 = __importDefault(require("path"));
+const yamljs_1 = __importDefault(require("yamljs"));
 const storage_1 = __importDefault(require("../storage"));
 const termx_1 = require("termx");
 const io_1 = require("@unete/io");
 const chalk_1 = __importDefault(require("chalk"));
 const server_1 = require("../server");
+const terminal_kit_1 = require("terminal-kit");
+const fs_1 = require("fs");
 const { toArray } = require('rxjs/operators');
 { //? @note REGEX
     var REGEX_ASSIGNMENT = /^\$\.([^(]+)=(.+)$/;
@@ -117,7 +121,21 @@ function connect(url, program) {
     });
 }
 exports.connect = connect;
+function init() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const defaultOptions = yield server_1.getConfig();
+        terminal_kit_1.terminal.cyan("Which language do you want to use?");
+        terminal_kit_1.terminal.singleColumnMenu(["Typescript", "Javascript"], {}, (err, response) => {
+            const selectedLanguage = response.selectedText;
+            fs_1.writeFileSync(path_1.default.resolve(process.cwd(), "./unete.yml"), yamljs_1.default.stringify(defaultOptions));
+            process.exit(0);
+        });
+    });
+}
+exports.init = init;
 exports.serve = server_1.serve;
+exports.s = server_1.serve;
+exports.c = connect;
 { //? @note Utility Functions
     var helpify = function (obj, help, header = "", pre = "", tabs = "") {
         let str = termx_1.cold(header && `+ ${pre + "*"}:`) || "";

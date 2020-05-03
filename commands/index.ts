@@ -8,7 +8,9 @@ import { log, danger, cold, highlight, warning } from "termx";
 import readline from "readline-sync";
 import { Socket as Sock, Server } from "@unete/io";
 import Chalk from "chalk";
-import { serve as $serve } from '../server';
+import { serve as $serve, getConfig } from '../server';
+import { terminal as Terminal } from "terminal-kit";
+import * as Templates from "../init/templates";
 
 const { toArray } = require('rxjs/operators');
 
@@ -136,6 +138,17 @@ export async function connect (url: string, program: any) {
 
 export async function init () {
     
+    Terminal.cyan("Which template do you want to use?")
+    Terminal.singleColumnMenu(["Typescript", "Javascript"], {}, async (err, response) => {
+        const selectedLanguage = response.selectedText;
+
+        switch (selectedLanguage) {
+            case "Typescript": await Templates.Typescript(); break;
+            case "Javascript": await Templates.Javascript(); break;
+        }
+
+        process.exit(0);
+    })
 }
 
 export const serve = $serve;

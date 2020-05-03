@@ -202,7 +202,7 @@ export async function serve (cmd: any, configFile: string) {
  
 */
 
-function getConfig(configFile: string = resolve(process.cwd(), "./unete.yml")): ServeConfig {
+export function getConfig(configFile: string = resolve(process.cwd(), "./unete.yml")): ServeConfig {
     var config: any = {};
     
     try { config = load(configFile); } catch (exc) {}
