@@ -20,7 +20,7 @@
     "commander": "^2.20.0",
     "git-clone": "^0.1.0",
     "git-shallow-clone": "^0.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "nthline": "^1.0.2",
     "rxjs": "^6.5.3",
     "terminal-kit": "^1.35.2",
