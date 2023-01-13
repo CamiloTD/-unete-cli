@@ -23,7 +23,7 @@
     "moment": "^2.24.0",
     "nthline": "^1.0.2",
     "rxjs": "^6.5.3",
-    "terminal-kit": "^1.35.2",
+    "terminal-kit": "^2.1.8",
     "termx": "^1.0.7",
     "unete-fs": "^1.0.5",
     "yamljs": "^0.3.0"
